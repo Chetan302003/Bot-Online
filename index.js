@@ -1,23 +1,33 @@
-import { Client, GatewayIntentBits, ActivityType } from "discord.js";
+const { Client, GatewayIntentBits, ActivityType } = require("discord.js");
 
-const client1 = new Client({ intents: [GatewayIntentBits.Guilds] });
-const client2 = new Client({ intents: [GatewayIntentBits.Guilds] });
+// HR BOT
+const hrBot = new Client({
+  intents: [GatewayIntentBits.Guilds],
+});
 
-client1.once("ready", () => {
-  console.log(`Bot1 Online: ${client1.user.tag}`);
-  client1.user.setPresence({
-    activities: [{ name: "HR System", type: ActivityType.Watching }],
-    status: "online"
+// EVENT BOT
+const eventBot = new Client({
+  intents: [GatewayIntentBits.Guilds],
+});
+
+// HR BOT READY
+hrBot.once("ready", () => {
+  console.log(`HR Bot Logged in as ${hrBot.user.tag}`);
+  hrBot.user.setPresence({
+    activities: [{ name: "Managing HR Operations", type: ActivityType.Playing }],
+    status: "online",
   });
 });
 
-client2.once("ready", () => {
-  console.log(`Bot2 Online: ${client2.user.tag}`);
-  client2.user.setPresence({
-    activities: [{ name: "Slot System", type: ActivityType.Watching }],
-    status: "online"
+// EVENT BOT READY
+eventBot.once("ready", () => {
+  console.log(`Event Bot Logged in as ${eventBot.user.tag}`);
+  eventBot.user.setPresence({
+    activities: [{ name: "Managing Events", type: ActivityType.Watching }],
+    status: "online",
   });
 });
 
-client1.login("MTQ2MDE2NjI1MTk1ODc2NzczMA.GwCOtW.KPB-8USo6x0N3EdaES8mX7LGewAWC3omksqVbo");
-client2.login("TOKEN_2");
+// LOGIN USING ENV VARIABLES
+hrBot.login(process.env.HR_TOKEN);
+eventBot.login(process.env.EVENT_TOKEN);
