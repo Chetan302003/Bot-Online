@@ -1,4 +1,17 @@
 const { Client, GatewayIntentBits, ActivityType } = require("discord.js");
+const express = require("express");
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Simple web route
+app.get("/", (req, res) => {
+  res.send("Bot is running");
+});
+
+app.listen(PORT, () => {
+  console.log("Web server running");
+});
 
 // HR BOT
 const hrBot = new Client({
@@ -10,16 +23,14 @@ const eventBot = new Client({
   intents: [GatewayIntentBits.Guilds],
 });
 
-// HR BOT READY
 hrBot.once("ready", () => {
   console.log(`HR Bot Logged in as ${hrBot.user.tag}`);
   hrBot.user.setPresence({
-    activities: [{ name: "Managing HR Operations", type: ActivityType.Playing }],
+    activities: [{ name: "Managing HR", type: ActivityType.Playing }],
     status: "online",
   });
 });
 
-// EVENT BOT READY
 eventBot.once("ready", () => {
   console.log(`Event Bot Logged in as ${eventBot.user.tag}`);
   eventBot.user.setPresence({
@@ -28,6 +39,5 @@ eventBot.once("ready", () => {
   });
 });
 
-// LOGIN USING ENV VARIABLES
 hrBot.login(process.env.HR_TOKEN);
 eventBot.login(process.env.EVENT_TOKEN);
