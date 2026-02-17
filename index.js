@@ -7,16 +7,16 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Root route
-app.get("/", (req, res) => {
-  res.status(200).send("Bot is running");
-});
-
-// Health check route (recommended to ping this)
 app.get("/health", (req, res) => {
-  res.sendStatus(200);
+  res.status(200).send("OK");
 });
 
-// IMPORTANT: Bind to 0.0.0.0 for Render
+// Optional root route
+app.get("/", (req, res) => {
+  res.status(200).send("Bot Alive");
+});
+
+// IMPORTANT for Render
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Web server running on port ${PORT}`);
 });
