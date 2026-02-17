@@ -1,12 +1,14 @@
 {
-  "name": "green-dot-bots",
+  "name": "bot-online",
   "version": "1.0.0",
+  "description": "Discord HR and Event Bot",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
-    "discord.js": "^14.0.0"
+    "discord.js": "^14.14.1",
     "express": "^4.18.2"
   }
 }
