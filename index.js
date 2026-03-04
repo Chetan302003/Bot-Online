@@ -1,60 +1,14 @@
-const { Client, GatewayIntentBits, ActivityType } = require("discord.js");
-const express = require("express");
+const { Client, GatewayIntentBits } = require("discord.js");
 
-console.log("File loaded");
-
-// ================= EXPRESS =================
-
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-app.get("/", (req, res) => {
-  res.send("Bot Alive");
-});
-
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Web server running on port ${PORT}`);
-});
-
-// ================= DISCORD =================
-
-console.log("Creating clients...");
-
-const hrBot = new Client({
+const client = new Client({
   intents: [GatewayIntentBits.Guilds],
 });
 
-const eventBot = new Client({
-  intents: [GatewayIntentBits.Guilds],
+client.once("ready", () => {
+  console.log(`Logged in as ${client.user.tag}`);
 });
 
-console.log("Clients created.");
-
-hrBot.once("ready", () => {
-  console.log(`HR Bot Logged in as ${hrBot.user.tag}`);
-  hrBot.user.setPresence({
-    activities: [{ name: "Managing HR Operations", type: ActivityType.Playing }],
-    status: "online",
-  });
-});
-
-eventBot.once("ready", () => {
-  console.log(`Event Bot Logged in as ${eventBot.user.tag}`);
-  eventBot.user.setPresence({
-    activities: [{ name: "Managing Events Slots", type: ActivityType.Watching }],
-    status: "online",
-  });
-});
-
-console.log("Attempting HR login...");
-hrBot.login(process.env.HR_TOKEN)
-  .then(() => console.log("HR login promise resolved"))
-  .catch(err => console.error("HR login error:", err));
-
-console.log("Attempting EVENT login...");
-eventBot.login(process.env.EVENT_TOKEN)
-  .then(() => console.log("EVENT login promise resolved"))
-  .catch(err => console.error("EVENT login error:", err));
+client.login(process.env.HR_TOKEN);
 
 // const { Client, GatewayIntentBits, ActivityType } = require("discord.js");
 // const express = require("express");
