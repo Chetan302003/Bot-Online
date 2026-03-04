@@ -70,10 +70,6 @@ if (!process.env.HR_TOKEN || !process.env.EVENT_TOKEN) {
   process.exit(1);
 }
 
-hrBot.login(process.env.HR_TOKEN)
-  .then(() => console.log("HR Bot login successful"))
-  .catch(err => console.error("HR Bot login failed:", err));
-
-eventBot.login(process.env.EVENT_TOKEN)
-  .then(() => console.log("Event Bot login successful"))
-  .catch(err => console.error("Event Bot login failed:", err));
+console.log("File loaded");
+console.log("HR TOKEN exists:", !!process.env.HR_TOKEN);
+console.log("EVENT TOKEN exists:", !!process.env.EVENT_TOKEN);
