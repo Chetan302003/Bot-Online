@@ -33,10 +33,10 @@ const eventBot = new Client({
   intents: [GatewayIntentBits.Guilds],
 });
 
-// SYSTEM BOT
-const sysBot = new Client({
-  intents: [GatewayIntentBits.Guilds],
-});
+// // SYSTEM BOT
+// const sysBot = new Client({
+//   intents: [GatewayIntentBits.Guilds],
+// });
 
 
 // HR BOT READY
@@ -59,15 +59,15 @@ eventBot.once("ready", () => {
   });
 });
 
-// SYSTEM BOT READY
-sysBot.once("ready", () => {
-  console.log(`Aura  Logged in as ${sysBot.user.tag}`);
+// // SYSTEM BOT READY
+// sysBot.once("ready", () => {
+//   console.log(`Aura  Logged in as ${sysBot.user.tag}`);
 
-  eventBot.user.setPresence({
-    activities: [{ name: "Managing AURA ", type: ActivityType.Watching }],
-    status: "online",
-  });
-});
+//   eventBot.user.setPresence({
+//     activities: [{ name: "Managing AURA ", type: ActivityType.Watching }],
+//     status: "online",
+//   });
+// });
 
 // ================= ERROR HANDLING =================
 
@@ -81,11 +81,11 @@ process.on("uncaughtException", (error) => {
 
 // ================= LOGIN =================
 
-if (!process.env.HR_TOKEN || !process.env.EVENT_TOKEN || !process.env.SYS_TOKEN) {
+if (!process.env.HR_TOKEN || !process.env.EVENT_TOKEN) {
   console.error("❌ Bot tokens are missing in environment variables.");
   process.exit(1);
 }
 
 hrBot.login(process.env.HR_TOKEN);
 eventBot.login(process.env.EVENT_TOKEN);
-sysBot.login(process.env.SYS_TOKEN);
+//sysBot.login(process.env.SYS_TOKEN);
