@@ -33,12 +33,6 @@ const eventBot = new Client({
   intents: [GatewayIntentBits.Guilds],
 });
 
-// // SYSTEM BOT
-// const sysBot = new Client({
-//   intents: [GatewayIntentBits.Guilds],
-// });
-
-
 // HR BOT READY
 hrBot.once("ready", () => {
   console.log(`HR Bot Logged in as ${hrBot.user.tag}`);
@@ -59,16 +53,6 @@ eventBot.once("ready", () => {
   });
 });
 
-// // SYSTEM BOT READY
-// sysBot.once("ready", () => {
-//   console.log(`Aura  Logged in as ${sysBot.user.tag}`);
-
-//   eventBot.user.setPresence({
-//     activities: [{ name: "Managing AURA ", type: ActivityType.Watching }],
-//     status: "online",
-//   });
-// });
-
 // ================= ERROR HANDLING =================
 
 process.on("unhandledRejection", (error) => {
@@ -88,4 +72,3 @@ if (!process.env.HR_TOKEN || !process.env.EVENT_TOKEN) {
 
 hrBot.login(process.env.HR_TOKEN);
 eventBot.login(process.env.EVENT_TOKEN);
-//sysBot.login(process.env.SYS_TOKEN);
